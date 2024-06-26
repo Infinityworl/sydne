@@ -404,3 +404,24 @@ async def geg_template(client, message):
     settings = await get_settings(grp_id)
     template = settings['template']
     await sts.edit(f"Cᴜʀʀᴇɴᴛ Tᴇᴍᴘʟᴀᴛᴇ Fᴏʀ {title} Iꜱ\n\n{template}")
+
+
+@Client.on_message(filters.command('set_welcome'))
+async def save_welcome(client, message):
+    userid = message.from_user.id if message.from_user else None
+    if not userid:
+        return await message.reply("<b>You are Anonymous admin you can't use this command !</b>")
+    chat_type = message.chat.type
+    if chat_type not in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        return await message.reply_text("Use this command in group.")      
+    grp_id = message.chat.id
+    title = message.chat.title
+    if not await is_check_admin(client, grp_id, message.from_user.id):
+        return await message.reply_text('You not admin in this group.')
+    try:
+        welcome = message.text.split(" ", 1)[1]
+    except:
+        return await message.reply_text("Command Incomplete!")    
+    await save_group_settings(grp_id, 'welcome_text', welcome)
+    await message.reply_text(f"Successfully changed welcome for {title} to\n\n{welcome}")
+        
