@@ -14,32 +14,31 @@ import logging, re, asyncio, time, shutil, psutil, os, sys
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
-
-@Client.on_message(filters.new_chat_members & filters.group)
-async def savegroup_and_welcome(bot, message):
-    r_j_check = [u.id for u in message.new_chat_members]
-    if bot.id in r_j_check:
-        if not await db.get_chat(message.chat.id):
-            total=await bot.get_chat_members_count(message.chat.id)
-            r_j = message.from_user.mention if message.from_user else "Anonymous" 
-            await bot.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(a=message.chat.title, b=message.chat.id, c=message.chat.username, d=total, e=r_j, f=bot.mention))       
-            await db.add_chat(message.chat.id, message.chat.title, message.chat.username)
-        if message.chat.id in temp.BANNED_CHATS:
-            buttons = [[InlineKeyboardButton('Sᴜᴩᴩᴏʀᴛ', url=f'https://t.me/{SUPPORT_CHAT}')]]
-            k = await message.reply("CHAT NOT ALLOWED 🐞\n\nMʏ Aᴅᴍɪɴs Hᴀs Rᴇsᴛʀɪᴄᴛᴇᴅ Mᴇ Fʀᴏᴍ Wᴏʀᴋɪɴɢ Hᴇʀᴇ ! Iғ Yᴏᴜ Wᴀɴᴛ Tᴏ Kɴᴏᴡ Mᴏʀᴇ Aʙᴏᴜᴛ Iᴛ Cᴏɴᴛᴀᴄᴛ Sᴜᴘᴘᴏʀᴛ", reply_markup=InlineKeyboardMarkup(buttons))
-            try: await k.pin()
-            except: pass
-            return await bot.leave_chat(message.chat.id)
-           
-        buttons = [[InlineKeyboardButton('Hᴇʟᴩ', url=f"https://t.me/{temp.U_NAME}?start=help")]]
-        await message.reply(text="❤️ Tʜᴀɴᴋs Tᴏ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜ'ʀ Gʀᴏᴜᴘ.\n» Dᴏɴ'ᴛ Fᴏʀɢᴇᴛ Tᴏ Mᴀᴋᴇ Mᴇ Aᴅᴍɪɴ.\n» Is Aɴʏ Dᴏᴜʙᴛ's Aʙᴏᴜᴛ Usɪɴɢ Mᴇ Cʟɪᴄᴋ Bᴇʟᴏᴡ Bᴜᴛᴛᴏɴ...✨", reply_markup=InlineKeyboardMarkup(buttons))
-    else:
-        for u in message.new_chat_members:
-            if (temp.MELCOW).get('welcome') is not None:
-                try: await (temp.MELCOW['welcome']).delete()
-                except: pass
-            if WELCOM_PIC: temp.MELCOW['welcome'] = await message.reply_photo(photo=WELCOM_PIC, caption=WELCOM_TEXT.format(user=u.mention, chat=message.chat.title))
-            else: temp.MELCOW['welcome'] = await message.reply_text(text=WELCOM_TEXT.format(user=u.mention, chat=message.chat.title))
+@Client.on_chat_member_updated(filters.group)
+async def welcome(bot, message):
+    if message.new_chat_member and not message.old_chat_member:
+        if message.new_chat_member.user.id == temp.ME:
+            buttons = [[
+                InlineKeyboardButton('ᴜᴘᴅᴀᴛᴇ', url=f'https://t.me/infinity_Lk'),
+                InlineKeyboardButton('ꜱᴜᴘᴘᴏʀᴛ', url=f'https://t.me/infinity_Lk')
+            ]]
+            reply_markup=InlineKeyboardMarkup(buttons)
+            user = message.from_user.mention if message.from_user else "Dear"
+            await bot.send_photo(chat_id=message.chat.id, photo=random.choice(PICS), caption=f"👋 Hello {user},\n\nThank you for adding me to the <b>'{message.chat.title}'</b> group, Don't forget to make me admin. If you want to know more ask the support group. 😘</b>", reply_markup=reply_markup)
+            if not await db.get_chat(message.chat.id):
+                total = await bot.get_chat_members_count(message.chat.id)
+                username = f'@{message.chat.username}' if message.chat.username else 'Private'
+                await bot.send_message(LOG_CHANNEL, script.NEW_GROUP_TXT.format(message.chat.title, message.chat.id, username, total))       
+                await db.add_chat(message.chat.id, message.chat.title)
+            return
+        settings = await get_settings(message.chat.id)
+        if settings["welcome"]:
+            WELCOME = settings['welcome_text']
+            welcome_msg = WELCOME.format(
+                mention = message.new_chat_member.user.mention,
+                title = message.chat.title
+            )
+            await bot.send_message(chat_id=message.chat.id, text=welcome_msg)
 
 
 @Client.on_message(filters.command('leave') & filters.user(ADMINS))
