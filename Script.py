@@ -238,4 +238,4 @@ Fʀᴇᴇ Dɪꜱᴋ: {}"""
 
 <b>📖️ Sᴛᴏʀʏ ➜ {plot}</b>
 
-<b><blockquote><a href=https://t.me/Itzmecp>#FilmZone</a> | <a href=https://t.me/filmzone_official>@FilmZone_Official</a></blockquote></b>"""
+NEW_GROUP_TXT = """<b>Hᴇʏ {user} 💞</b>
