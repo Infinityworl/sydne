@@ -216,10 +216,10 @@ async def start(client, message):
         reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('▫️️ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ▫️️', url=f'https://t.me/FilmZone_Official') ] ] ),
         protect_content=True if pre == 'filep' else False,
         )   
-    k = await client.send_message(chat_id = message.from_user.id, text=f"<b>TʜᴀɴᴋYᴏᴜ Fᴏʀ Uꜱɪɴɢ FɪʟᴍZᴏɴᴇ Bᴏᴛꜱ ❤</b>") 
+    k = await client.send_message(chat_id = message.from_user.id, text=f"<b>🔴 If you are downloading a x265 codec file, you must make sure that your device supports x265 codec before you download it ESPECIALLY MOBILE PHONES</b>\n\n<b>🟢 Here are few Media Players that commonly used to watch movies from each OS</b>")
     await asyncio.sleep(600)
     await msg.delete()
-                        
+                                
 
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
