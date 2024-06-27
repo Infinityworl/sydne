@@ -238,4 +238,4 @@ Fʀᴇᴇ Dɪꜱᴋ: {}"""
 
 <b>📖️ Sᴛᴏʀʏ ➜ {plot}</b>
 
-NEW_GROUP_TXT = """<b>Hᴇʏ {user} 💞</b>
+NEW_GROUP_TXT = """<b>Hᴇʏ {user} 💞</b>"""
