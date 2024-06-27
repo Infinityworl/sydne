@@ -238,8 +238,5 @@ Fʀᴇᴇ Dɪꜱᴋ: {}"""
 
 <b>📖️ Sᴛᴏʀʏ ➜ {plot}</b>
 
-NEW_GROUP_TXT = """#NewGroup
-Title - {}
-ID - <code>{}</code>
-Username - {}
-Total - <code>{}</code>"""
+   NEW_GROUP_TEXT = "Hᴇʏ {}\nHᴇʀᴇ Mꜱ Mʏ Hᴇʟᴩ"
+     
