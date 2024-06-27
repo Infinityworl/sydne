@@ -238,5 +238,4 @@ Fʀᴇᴇ Dɪꜱᴋ: {}"""
 
 <b>📖️ Sᴛᴏʀʏ ➜ {plot}</b>
 
-   NEW_GROUP_TEXT = "Hᴇʏ {}\nHᴇʀᴇ Mꜱ Mʏ Hᴇʟᴩ"
      
