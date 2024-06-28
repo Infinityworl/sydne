@@ -188,7 +188,8 @@ async def auto_filter(client, msg, spoll=False):
             return
         if 2 < len(message.text) < 100:
             search = message.text
-            m=await message.reply_text("<code>Searching...</code>")
+            m=await message.replay_photo(message.chat.id, "https://te.legra.ph/file/cbb98a1184c78767f44d9.jpg")
+            await message.reply_text("<code>Searching...</code>")
             await asyncio.sleep(2)
             await m.delete()
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
@@ -203,7 +204,8 @@ async def auto_filter(client, msg, spoll=False):
         settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
-        m=await message.reply_text("<code>Searching...</code>")
+        m=await message.replay_photo(message.chat.id, "https://te.legra.ph/file/cbb98a1184c78767f44d9.jpg")
+        await message.reply_text("<code>Searching...</code>")
         await asyncio.sleep(3)
         await m.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
