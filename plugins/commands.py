@@ -182,7 +182,7 @@ async def start(client, message):
                 try: f_caption=CUSTOM_FILE_CAPTION.format(mention=message.from_user.mention, file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='' if f_caption is None else f_caption)
                 except: return
             return await msg.edit_caption(f_caption)
-            k = await client.send_message(chat_id = message.from_user.id, text=f"<b>TʜᴀɴᴋYᴏᴜ Fᴏʀ Uꜱɪɴɢ FɪʟᴍZᴏɴᴇ Bᴏᴛꜱ ❤</b>")
+            k = await client.send_message(chat_id = message.from_user.id, text=f"<b>🔴 If you are downloading a x265 codec file, you must make sure that your device supports x265 codec before you download it ESPECIALLY MOBILE PHONES</b>\n\n<b>🟢 Here are few Media Players that commonly used to watch movies from each OS</b>")
             await asyncio.sleep(600)
             await msg.delete()
         except: pass
@@ -203,7 +203,7 @@ async def start(client, message):
         chat_id=message.from_user.id, 
         file_id=file_id,
         caption=f_caption,
-        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('▫️️ ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ ▫️️', url=f'https://t.me/FilmZone_Official') ] ] ),
+        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('🔰 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🔰', url=f'https://t.me/infinity_Lk') ] ] ),
         protect_content=True if pre == 'filep' else False,
         )   
     k = await client.send_message(chat_id = message.from_user.id, text=f"<b>🔴 If you are downloading a x265 codec file, you must make sure that your device supports x265 codec before you download it ESPECIALLY MOBILE PHONES</b>\n\n<b>🟢 Here are few Media Players that commonly used to watch movies from each OS</b>")
