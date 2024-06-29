@@ -189,7 +189,7 @@ async def auto_filter(client, msg, spoll=False):
         if 2 < len(message.text) < 100:
             search = message.text
             tik = f"<b> මේ තියෙන්නේ ඔයා හොයන {search} සබ්ටයිටල් එක \n\n └ʀᴇQᴜᴇꜱᴛ ʙʏ: {message.from_user.mention} </b>"
-            m = await message.reply_photo(photo=NOR_IMG, caption=tik, reply_markup=InlineKeyboardMarkup(btn))
+            m = await message.reply_photo(photo=NOR_IMG, caption=tik, reply_markup=reply_markup, parse_mode=enums.ParseMode.HTML)
             await asyncio.sleep(2)
             await m.delete()
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
@@ -205,7 +205,7 @@ async def auto_filter(client, msg, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
         tik = f"<b> මේ තියෙන්නේ ඔයා හොයන {search} සබ්ටයිටල් එක \n\n └ʀᴇQᴜᴇꜱᴛ ʙʏ: {message.from_user.mention} </b>"
-        m = await message.reply_photo(photo=NOR_IMG, caption=tik, reply_markup=InlineKeyboardMarkup(btn))
+        m = await message.reply_photo(photo=NOR_IMG, caption=tik, reply_markup=reply_markup, parse_mode=enums.ParseMode.HTML)
         await asyncio.sleep(3)
         await m.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
