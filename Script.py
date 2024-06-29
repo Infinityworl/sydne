@@ -7,7 +7,7 @@ class script(object):
     
     HELP_TXT = "Hᴇʏ {}\nHᴇʀᴇ Mꜱ Mʏ Hᴇʟᴩ"
 
-    ABOUT_TXT = """<b>🔰 ᴍʏ ɴᴀᴍᴇ : <a href=https://t.me/infinityx_Lk>Aԃԃαɱʂ</a>
+    ABOUT_TXT = """<b>🔰 ᴍʏ ɴᴀᴍᴇ : <a href=https://t.me/infinityx_Lk>Sყԃɳҽყ</a>
 
 📝 ʟᴀɴɢᴜᴀɢᴇ: <a href=https://t.me/infinityx_Lk>ᴘʏᴛʜᴏɴᴇ 3</a>
 
