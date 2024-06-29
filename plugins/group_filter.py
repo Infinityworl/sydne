@@ -188,10 +188,12 @@ async def auto_filter(client, msg, spoll=False):
             return
         if 2 < len(message.text) < 100:
             search = message.text
-            tik = f"<b> මේ තියෙන්නේ ඔයා හොයන {search} සබ්ටයිටල් එක \n\n └ʀᴇQᴜᴇꜱᴛ ʙʏ: {message.from_user.mention} </b>"
-            m = await message.reply_photo(photo=NOR_IMG, caption=tik, reply_markup=reply_markup, parse_mode=enums.ParseMode.HTML)
-            await asyncio.sleep(2)
-            await m.delete()
+            elif query.data == "newdata":
+        buttons = [[
+            InlineKeyboardButton('✘ Cʟᴏꜱᴇ', 'close_data'),
+            InlineKeyboardButton('« Bᴀᴄᴋ', 'help')           
+        ]]
+        await query.edit_message_media(InputMediaPhoto(random.choice(PICS), script.FILE_TXT, enums.ParseMode.HTML), reply_markup=InlineKeyboardMarkup(buttons))
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
                 if settings["spell_check"]:
@@ -203,11 +205,12 @@ async def auto_filter(client, msg, spoll=False):
     else:
         settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
-        search, files, offset, total_results = spoll
-        tik = f"<b> මේ තියෙන්නේ ඔයා හොයන {search} සබ්ටයිටල් එක \n\n └ʀᴇQᴜᴇꜱᴛ ʙʏ: {message.from_user.mention} </b>"
-        m = await message.reply_photo(photo=NOR_IMG, caption=tik, reply_markup=reply_markup, parse_mode=enums.ParseMode.HTML)
-        await asyncio.sleep(3)
-        await m.delete()
+        elif query.data == "newdata":
+        buttons = [[
+            InlineKeyboardButton('✘ Cʟᴏꜱᴇ', 'close_data'),
+            InlineKeyboardButton('« Bᴀᴄᴋ', 'help')           
+        ]]
+        await query.edit_message_media(InputMediaPhoto(random.choice(PICS), script.FILE_TXT, enums.ParseMode.HTML), reply_markup=InlineKeyboardMarkup(buttons))
     pre = 'filep' if settings['file_secure'] else 'file'
     req = message.from_user.id if message.from_user else 0
 
