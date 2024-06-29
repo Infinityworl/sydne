@@ -189,9 +189,9 @@ async def auto_filter(client, msg, spoll=False):
         if 2 < len(message.text) < 100:
             search = message.text
             m=await message.reply_text("<b> 𝙎𝙚𝙖𝙧𝙘𝙝𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝙌𝙪𝙚𝙧𝙮 𝙃𝙤𝙡𝙙 𝙊𝙣 </b>")
-            await asyncio.sleep(15)
+            await asyncio.sleep(0.8)
             await m.delete()
-            await message.delete()
+            await message.delete(30)
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
                 if settings["spell_check"]:
@@ -206,7 +206,7 @@ async def auto_filter(client, msg, spoll=False):
         m=await message.reply_text("<b> 𝙎𝙚𝙖𝙧𝙘𝙝𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝙌𝙪𝙚𝙧𝙮 𝙃𝙤𝙡𝙙 𝙊𝙣 </b>")
         await asyncio.sleep(15)
         await m.delete()   
-        await message.delete()
+        await message.delete(30)
     pre = 'filep' if settings['file_secure'] else 'file'
     req = message.from_user.id if message.from_user else 0
 
