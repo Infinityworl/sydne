@@ -189,7 +189,7 @@ async def auto_filter(client, msg, spoll=False):
         if 2 < len(message.text) < 100:
             search = message.text
             m=await message.reply_text("<b> 𝙎𝙚𝙖𝙧𝙘𝙝𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝙌𝙪𝙚𝙧𝙮 𝙃𝙤𝙡𝙙 𝙊𝙣 </b>")
-            await asyncio.sleep(0.8)
+            await asyncio.sleep(15)
             await m.delete()
             await message.delete()
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
@@ -204,7 +204,7 @@ async def auto_filter(client, msg, spoll=False):
         settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
         m=await message.reply_text("<b> 𝙎𝙚𝙖𝙧𝙘𝙝𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝙌𝙪𝙚𝙧𝙮 𝙃𝙤𝙡𝙙 𝙊𝙣 </b>")
-        await asyncio.sleep(0.8)
+        await asyncio.sleep(15)
         await m.delete()   
         await message.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
@@ -290,12 +290,12 @@ async def auto_filter(client, msg, spoll=False):
             await message.delete()
         except Exception as e:
             logger.exception(e)
-            cdb = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+            cdb = await message.reply_photo(photo=NOR_IMG, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
             await asyncio.sleep(300)
             await cdb.delete()
             await message.delete()
     else:
-        crl = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+        cdb = await message.reply_photo(photo=NOR_IMG, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
         await asyncio.sleep(300)
         await crl.delete()   
         await message.delete()
