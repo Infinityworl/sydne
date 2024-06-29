@@ -89,18 +89,22 @@ async def next_page(bot, query):
     nxreq  = query.from_user.id if query.from_user else 0
     if SHORT_URL and SHORT_API:          
         if settings["button"]:
-            btn = [[InlineKeyboardButton(text=f"▫️️{get_size(file.file_size)} | {file.file_name}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}"))] for file in files ]
+            btn = [[InlineKeyboardButton(text=f"{get_size(file.file_size)} | {file.file_name}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}"))] for file in files ]
         else:
             btn = [[InlineKeyboardButton(text=f"{file.file_name}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")),
                     InlineKeyboardButton(text=f"{get_size(file.file_size)}", url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}"))] for file in files ]
     else:        
         if settings["button"]:
-            btn = [[InlineKeyboardButton(text=f"▫️️{get_size(file.file_size)} | {file.file_name}", callback_data=f'files#{nxreq}#{file.file_id}')] for file in files ]
+            btn = [[InlineKeyboardButton(text=f"{get_size(file.file_size)} | {file.file_name}", callback_data=f'files#{nxreq}#{file.file_id}')] for file in files ]
         else:
             btn = [[InlineKeyboardButton(text=f"{file.file_name}", callback_data=f'files#{nxreq}#{file.file_id}'),
                     InlineKeyboardButton(text=f"{get_size(file.file_size)}", callback_data=f'files#{nxreq}#{file.file_id}')] for file in files ]
 
-    btn.insert(0, [InlineKeyboardButton("🌳 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🌳",  url='https://telegram.me/infinity_lk')])
+    btn.insert(0,
+            [InlineKeyboardButton("🌳 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🌳",  url='https://telegram.me/infinity_lk'),
+            InlineKeyboardButton("🌳 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🌳",  url='https://telegram.me/infinity_lk')]
+        )
+    
     if 0 < offset <= 10:
         off_set = 0
     elif offset == 0:
@@ -154,7 +158,7 @@ async def advantage_spoll_choker(bot, query):
             k = await query.message.edit('This Movie Not Found In DataBase')
             await asyncio.sleep(10)
             await k.delete()
-            await message.delete()
+            
 
 
 @Client.on_message(filters.group & filters.text & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & filters.incoming & filters.group)
@@ -192,6 +196,7 @@ async def auto_filter(client, msg, spoll=False):
             m=await message.reply_text("<b> 𝙎𝙚𝙖𝙧𝙘𝙝𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝙌𝙪𝙚𝙧𝙮 𝙃𝙤𝙡𝙙 𝙊𝙣 </b>")
             await asyncio.sleep(0.8)
             await m.delete()
+            await message.delete()
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
                 if settings["spell_check"]:
@@ -205,7 +210,8 @@ async def auto_filter(client, msg, spoll=False):
         message = msg.message.reply_to_message  # msg will be callback query
         m=await message.reply_text("<b> 𝙎𝙚𝙖𝙧𝙘𝙝𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝙌𝙪𝙚𝙧𝙮 𝙃𝙤𝙡𝙙 𝙊𝙣 </b>")
         await asyncio.sleep(0.8)
-        await m.delete()   
+        await m.delete()  
+        await message.delete()
     pre = 'filep' if settings['file_secure'] else 'file'
     req = message.from_user.id if message.from_user else 0
 
@@ -222,7 +228,11 @@ async def auto_filter(client, msg, spoll=False):
             btn = [[InlineKeyboardButton(text=f"{file.file_name}", callback_data=f'{pre}#{req}#{file.file_id}'),
                     InlineKeyboardButton(text=f"{get_size(file.file_size)}", callback_data=f'{pre}#{req}#{file.file_id}')] for file in files ] 
 
-    btn.insert(0, [InlineKeyboardButton("🌳 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🌳",  url='https://telegram.me/infinity_lk')])
+    btn.insert(0,
+            [InlineKeyboardButton("🌳 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🌳",  url='https://telegram.me/infinity_lk'),
+            InlineKeyboardButton("🌳 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🌳",  url='https://telegram.me/infinity_lk')]
+        )
+    
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
         temp.GP_BUTTONS[key] = search
