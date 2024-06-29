@@ -154,6 +154,7 @@ async def advantage_spoll_choker(bot, query):
             k = await query.message.edit('This Movie Not Found In DataBase')
             await asyncio.sleep(10)
             await k.delete()
+            await message.delete()
 
 
 @Client.on_message(filters.group & filters.text & filters.incoming & filters.chat(AUTH_GROUPS) if AUTH_GROUPS else filters.text & filters.incoming & filters.group)
@@ -191,7 +192,6 @@ async def auto_filter(client, msg, spoll=False):
             m=await message.reply_text("<b> 𝙎𝙚𝙖𝙧𝙘𝙝𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝙌𝙪𝙚𝙧𝙮 𝙃𝙤𝙡𝙙 𝙊𝙣 </b>")
             await asyncio.sleep(0.8)
             await m.delete()
-            await message.delete(30)
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
                 if settings["spell_check"]:
@@ -204,9 +204,8 @@ async def auto_filter(client, msg, spoll=False):
         settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
         m=await message.reply_text("<b> 𝙎𝙚𝙖𝙧𝙘𝙝𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝙌𝙪𝙚𝙧𝙮 𝙃𝙤𝙡𝙙 𝙊𝙣 </b>")
-        await asyncio.sleep(15)
+        await asyncio.sleep(0.8)
         await m.delete()   
-        await message.delete(30)
     pre = 'filep' if settings['file_secure'] else 'file'
     req = message.from_user.id if message.from_user else 0
 
@@ -314,6 +313,7 @@ async def advantage_spell_chok(msg):
         k = await msg.reply("I Cᴏᴜʟᴅɴ'ᴛ Fɪɴᴅ Aɴʏ Mᴏᴠɪᴇ Iɴ Tʜᴀᴛ Nᴀᴍᴇ")
         await asyncio.sleep(8)
         return await k.delete()
+        await message.delete()
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
     gs_parsed = [re.sub(r'\b(\-([a-zA-Z-\s])\-\simdb|(\-\s)?imdb|(\-\s)?wikipedia|\(|\)|\-|reviews|full|all|episode(s)?|film|movie|series)', '', i, flags=re.IGNORECASE) for i in gs]
@@ -339,12 +339,14 @@ async def advantage_spell_chok(msg):
         k = await msg.reply("I Cᴏᴜʟᴅɴ'ᴛ Fɪɴᴅ Aɴʏᴛʜɪɴɢ Rᴇʟᴀᴛᴇᴅ Tᴏ Tʜᴀᴛ. Cʜᴇᴄᴋ Yᴏᴜʀ Sᴘᴇʟʟɪɴɢ")
         await asyncio.sleep(8)
         return await k.delete()
+        await message.delete()
     temp.GP_SPELL[msg.id] = movielist
     btn = [[InlineKeyboardButton(text=movie.strip(), callback_data=f"spolling#{user}#{k}",)] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
     N = await msg.reply("I Cᴏᴜʟᴅɴ'ᴛ Fɪɴᴅ Aɴʏᴛʜɪɴɢ Rᴇʟᴀᴛᴇᴅ Tᴏ Tʜᴀᴛ. Dɪᴅ Yᴏᴜ Mᴇᴀɴ Aɴʏ Oɴᴇ Oғ Tʜᴇsᴇ?", reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(10)
     await N.delete()
+    await message.delete(30)
 
 
 async def manual_filters(client, message, text=False):
