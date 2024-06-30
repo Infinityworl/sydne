@@ -427,6 +427,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
         try: await query.answer(script.HOW_TO_DOWNLOAD.format(query.from_user.first_name), show_alert=True)
         except: await query.message.edit(script.HOW_TO_DOWNLOAD.format(query.from_user.first_name))
 
+    elif query.data == "reqinfo":
+        await query.answer(text=script.REQINFO, show_alert=True)
+
+    elif query.data == "minfo":
+        await query.answer(text=script.MINFO, show_alert=True)
+
+    elif query.data == "sinfo":
+        await query.answer(text=script.SINFO, show_alert=True)
+
+
     elif query.data == "start":                        
         buttons = [[
             InlineKeyboardButton("🔰 𝐀𝐝𝐝 𝐌𝐞 𝐘𝐨𝐮𝐫 𝐆𝐫𝐨𝐮𝐩 🔰", url=f"http://t.me/{temp.U_NAME}?startgroup=true")
