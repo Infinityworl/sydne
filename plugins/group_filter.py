@@ -230,10 +230,10 @@ async def auto_filter(client, msg, spoll=False):
                     InlineKeyboardButton(text=f"{file.file_name}", callback_data=f'{pre}#{req}#{file.file_id}')] for file in files ] 
 
     btn.insert(0,
-            [InlineKeyboardButton("🌳 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🌳",  url='https://telegram.me/infinity_lk'),
-            InlineKeyboardButton("🌳 ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 🌳",  url='https://telegram.me/infinity_lk')]
+            [InlineKeyboardButton(f'ɪɴꜰᴏ', 'reqinfo'),
+            InlineKeyboardButton(f'ᴍᴏᴠɪᴇ', 'minfo'),
+            InlineKeyboardButton(f'ꜱᴇʀɪᴇꜱ', 'sinfo')]
         )
-    
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
         temp.GP_BUTTONS[key] = search
@@ -284,7 +284,7 @@ async def auto_filter(client, msg, spoll=False):
             **locals()
         )
     else:
-        cap = f"💭 ʜᴇʏ {message.from_user.mention},\n\n♻️ ʜᴇʀᴇ ɪ ꜰᴏᴜɴᴅ ꜰᴏʀ ʏᴏᴜʀ sᴇᴀʀᴄʜ \n\n <b>🔎 Name - {search}</b> \n\n <b>🚀 Total Results {total_results}</b>\n\n<b> 📝 Request By - {message.from_user.mention}</b>"
+        cap = f"♻️ 𝙷𝚎𝚕𝚕𝚘 𝙷𝚎𝚛𝚎 𝙸 𝙵𝚘𝚞𝚗𝚍 𝚈𝚘𝚞𝚛 𝚀𝚞𝚎𝚛𝚢 \n\n 🔎 ɴᴀᴍᴇ - {search} \n\n🚀 ᴛᴏᴛᴀʟ ʀᴇꜱᴜʟᴛꜱ {total_results}\n\n📝 ʀᴇQᴜᴇꜱᴛ ʙʏ - {message.from_user.mention}"
     if imdb and imdb.get('poster'):
         try:
             hehe = await message.reply_photo(photo=imdb.get('poster'), caption=cap, reply_markup=InlineKeyboardMarkup(btn))
